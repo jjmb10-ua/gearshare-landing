@@ -3,150 +3,1159 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GEARSHARE — Comparte material deportivo</title>
-  <meta name="description" content="GEARSHARE: pide y presta material deportivo cerca de ti. Ahorra dinero y espacio para usos puntuales." />
+  <title>GEARSHARE — Comparte material deportivo entre personas</title>
+  <meta name="description" content="GearShare: la plataforma de economía colaborativa para pedir y prestar material deportivo cerca de ti. Ahorra dinero, espacio y practica más deporte." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg: #dbeafe;       /* azul pastel */
-      --card: rgba(255,255,255,.75);
-      --text: #0f172a;
-      --muted: rgba(15,23,42,.72);
-      --border: rgba(15,23,42,.12);
-      --shadow: 0 10px 30px rgba(2,6,23,.10);
-      --radius: 18px;
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --bg-light: #f0f9ff;
+      --bg-white: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+      --shadow-primary: 0 8px 30px rgba(14, 165, 233, 0.35);
+      --radius: 16px;
+      --radius-lg: 24px;
     }
-    *{ box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg, var(--bg), #ffffff);
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 22px;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .wrap{ width: min(1040px, 100%); }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(6px);
+
+    html {
+      scroll-behavior: smooth;
     }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.15fr 1fr;
-      align-items:center;
-      gap: 0;
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      line-height: 1.6;
     }
-    .content{ padding: 28px; }
-    h1{
-      margin:0;
-      font-size: clamp(28px, 3vw, 38px);
-      letter-spacing: .6px;
+
+    .container {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-size: 24px;
       font-weight: 900;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
     }
-    .tagline{
-      margin: 10px 0 0;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.5;
+
+    .logo span {
+      color: var(--text-dark);
     }
-    .bullets{
-      margin: 16px 0 0;
-      padding-left: 18px;
-      line-height: 1.8;
-      color: var(--text);
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
     }
-    .ctaRow{
-      margin-top: 18px;
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      flex-wrap: wrap;
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.2s;
     }
-    .btn{
-      display:inline-block;
-      padding: 12px 16px;
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
       border-radius: 12px;
-      border: 1px solid rgba(2,6,23,.18);
-      background: #0ea5e9;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
       color: white;
-      text-decoration:none;
-      font-weight: 800;
-      letter-spacing: .2px;
-      box-shadow: 0 8px 18px rgba(14,165,233,.25);
+      box-shadow: var(--shadow-primary);
     }
-    .btn:hover{ filter: brightness(0.98); }
-    .small{
-      font-size: 13px;
-      color: var(--muted);
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
     }
-    figure{ margin:0; padding: 18px; }
-    img{
-      width:100%;
-      height:auto;
-      display:block;
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--secondary), #059669);
+      color: white;
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.45);
+    }
+
+    .btn-lg {
+      padding: 18px 36px;
+      font-size: 17px;
       border-radius: 14px;
     }
-    .footer{
-      padding: 14px 18px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--muted);
-      text-align:center;
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      padding: 140px 0 80px;
+      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
     }
-    @media (max-width: 820px){
-      .grid{ grid-template-columns: 1fr; }
-      figure{ padding-top: 0; }
-      .content{ padding: 22px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--primary);
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      text-align: left;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 32px;
+      z-index: -1;
+      opacity: 0.15;
+    }
+
+    /* ===== PROBLEM SECTION ===== */
+    .problem {
+      padding: 100px 0;
+      background: var(--bg-white);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .problem-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .problem-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .problem-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .problem-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .problem-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ===== SOLUTION SECTION ===== */
+    .solution {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
+    }
+
+    .solution-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .solution-image {
+      position: relative;
+    }
+
+    .solution-image img {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .solution-list {
+      list-style: none;
+    }
+
+    .solution-list li {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .solution-list li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .solution-check {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--secondary), #059669);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .solution-text h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .solution-text p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how-it-works {
+      padding: 100px 0;
+      background: var(--bg-white);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      top: 60px;
+      right: -16px;
+      width: 32px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step-number {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 auto 20px;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ===== FEATURES ===== */
+    .features {
+      padding: 100px 0;
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+    }
+
+    .features .section-tag {
+      color: var(--secondary);
+    }
+
+    .features .section-subtitle {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ===== PROFILES ===== */
+    .profiles {
+      padding: 100px 0;
+      background: var(--bg-white);
+    }
+
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .profile-type {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .profile-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .profile-benefits {
+      list-style: none;
+    }
+
+    .profile-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .profile-benefits li::before {
+      content: '✓';
+      color: var(--secondary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== SURVEY CTA ===== */
+    .survey {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--primary), #0369a1);
+      color: white;
+      text-align: center;
+    }
+
+    .survey-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .survey-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 28px;
+    }
+
+    .survey h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .survey p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .survey .btn {
+      background: white;
+      color: var(--primary);
+      font-size: 18px;
+      padding: 20px 40px;
+    }
+
+    .survey .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .survey-note {
+      margin-top: 24px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* ===== VALUES ===== */
+    .values {
+      padding: 100px 0;
+      background: var(--bg-light);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+
+    .value-item {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .value-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--bg-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .value-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .value-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .logo {
+      color: white;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .footer-brand .logo span {
+      color: var(--primary);
+    }
+
+    .footer-brand p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-links h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .solution-content,
+      .profiles-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .problem-grid,
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .step::after {
+        display: none;
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 120px 0 60px;
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .problem-grid,
+      .features-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="card" aria-label="GEARSHARE">
-      <div class="grid">
-        <div class="content">
-          <h1>GEARSHARE</h1>
-          <p class="tagline">
-            Pide y presta material deportivo cerca de ti, de forma rápida y segura.
-            Ideal para usos puntuales sin comprar ni alquilar.
-          </p>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">GEAR<span>SHARE</span></a>
+        <ul class="nav-links">
+          <li><a href="#problema">El Problema</a></li>
+          <li><a href="#solucion">Solución</a></li>
+          <li><a href="#como-funciona">Cómo Funciona</a></li>
+          <li><a href="#ventajas">Ventajas</a></li>
+        </ul>
+        <a href="#encuesta" class="btn btn-primary">Colaborar</a>
+      </nav>
+    </div>
+  </header>
 
-          <ul class="bullets">
-            <li>Ahorra dinero y espacio</li>
-            <li>Disponibilidad por fechas</li>
-            <li>Perfiles y valoraciones</li>
-            <li>Depósito/seguro (según el material)</li>
-          </ul>
-
-          <div class="ctaRow">
-            <a class="btn" href="TU_LINK_ENCUESTA" target="_blank" rel="noopener">
-              Ir a la encuesta (2–3 min)
-            </a>
-            <span class="small">Tu respuesta nos ayuda a validar la idea.</span>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-badge">🚀 Próximamente disponible</span>
+            <h1>Practica cualquier deporte <span class="highlight">sin comprar el material</span></h1>
+            <p class="hero-subtitle">
+              GearShare conecta a personas que quieren prestar su material deportivo con quienes lo necesitan de forma puntual. Ahorra dinero, espacio y disfruta más del deporte.
+            </p>
+            <div class="hero-cta">
+              <a href="#encuesta" class="btn btn-primary btn-lg">Participar en la encuesta</a>
+              <a href="#solucion" class="btn btn-secondary btn-lg">Ver cómo funciona</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="stat-value">67%</div>
+                <div class="stat-label">del material se usa &lt;5 veces/año</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">+300€</div>
+                <div class="stat-label">coste medio por deporte nuevo</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">0</div>
+                <div class="stat-label">espacio necesario en casa</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=600&h=500&fit=crop" alt="Personas practicando deportes al aire libre" loading="eager" />
           </div>
         </div>
-
-        <figure>
-          <img
-            src="https://grillosport.es/wp-content/uploads/2022/11/Alquiler-material-y-equipamiento-deportivo-Grillo-sport.jpg"
-            alt="Material deportivo"
-            loading="lazy"
-          />
-        </figure>
       </div>
+    </section>
 
-      <div class="footer">
-        Proyecto académico · Smoke Test (QR → landing → encuesta)
+    <!-- PROBLEMA -->
+    <section class="problem" id="problema">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">El Problema</span>
+          <h2 class="section-title">¿Por qué dejamos de practicar nuevos deportes?</h2>
+          <p class="section-subtitle">
+            Existen barreras reales que impiden que más personas disfruten del deporte de forma ocasional o prueben nuevas actividades.
+          </p>
+        </div>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">💸</div>
+            <h3>Material demasiado caro</h3>
+            <p>Comprar equipamiento deportivo nuevo supone una inversión elevada que muchas veces no compensa para usos puntuales o para probar un deporte nuevo.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">📦</div>
+            <h3>Sin espacio para guardarlo</h3>
+            <p>Los hogares actuales tienen espacio limitado. Almacenar tablas de surf, esquís o bicicletas se convierte en un problema logístico real.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">❓</div>
+            <h3>Incertidumbre al comprar</h3>
+            <p>¿Y si no me gusta? ¿Y si elijo mal? El miedo a invertir en algo que acabará olvidado frena a muchas personas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUCIÓN -->
+    <section class="solution" id="solucion">
+      <div class="container">
+        <div class="solution-content">
+          <div class="solution-image">
+            <img src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=600&h=500&fit=crop" alt="App móvil de GearShare" loading="lazy" />
+          </div>
+          <div class="solution-text-content">
+            <span class="section-tag">La Solución</span>
+            <h2 class="section-title">GearShare: accede al deporte sin comprarlo</h2>
+            <p class="section-subtitle" style="margin-bottom: 40px;">
+              Una plataforma donde particulares y empresas comparten material deportivo de forma segura, flexible y cercana.
+            </p>
+            <ul class="solution-list">
+              <li>
+                <span class="solution-check">✓</span>
+                <div class="solution-text">
+                  <h4>Economía colaborativa</h4>
+                  <p>Conectamos propietarios con usuarios. Tú eliges el material, la fecha y el lugar.</p>
+                </div>
+              </li>
+              <li>
+                <span class="solution-check">✓</span>
+                <div class="solution-text">
+                  <h4>Seguridad garantizada</h4>
+                  <p>Sistema de valoraciones, verificación de identidad y seguro integrado para proteger el material.</p>
+                </div>
+              </li>
+              <li>
+                <span class="solution-check">✓</span>
+                <div class="solution-text">
+                  <h4>Geolocalización inteligente</h4>
+                  <p>Encuentra material disponible cerca de ti o en tu destino de vacaciones.</p>
+                </div>
+              </li>
+              <li>
+                <span class="solution-check">✓</span>
+                <div class="solution-text">
+                  <h4>Sostenible y circular</h4>
+                  <p>Alargamos la vida útil del equipamiento y reducimos el consumo innecesario.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="how-it-works" id="como-funciona">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Cómo Funciona</span>
+          <h2 class="section-title">Tan fácil como 1, 2, 3, 4</h2>
+          <p class="section-subtitle">
+            Pedir o prestar material deportivo nunca fue tan sencillo.
+          </p>
+        </div>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Busca</h3>
+            <p>Explora el material disponible cerca de ti filtrando por deporte, fechas y ubicación.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Reserva</h3>
+            <p>Selecciona las fechas que necesitas y solicita el préstamo al propietario.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Recoge</h3>
+            <p>Coordina la entrega en persona o en un punto de recogida acordado.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Disfruta</h3>
+            <p>Practica tu deporte y devuelve el material cuando termines. ¡Así de simple!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTAJAS -->
+    <section class="features" id="ventajas">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Ventajas</span>
+          <h2 class="section-title">¿Por qué elegir GearShare?</h2>
+          <p class="section-subtitle">
+            Hemos diseñado cada detalle pensando en tu comodidad y seguridad.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Ahorra dinero</h3>
+            <p>Paga solo por el tiempo que realmente uses el material. Sin inversiones innecesarias.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>Reputación y confianza</h3>
+            <p>Sistema de valoraciones y perfiles verificados para transacciones seguras.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Seguro incluido</h3>
+            <p>Protección ante daños o imprevistos. Préstamos seguros para ambas partes.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Material cercano</h3>
+            <p>Encuentra equipamiento cerca de ti o en el destino de tus vacaciones.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Flexibilidad total</h3>
+            <p>Alquila por días, semanas o temporadas. Tú decides cuánto tiempo lo necesitas.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌱</div>
+            <h3>Consumo responsable</h3>
+            <p>Contribuye a la economía circular y reduce el impacto ambiental del consumo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERFILES -->
+    <section class="profiles">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Para Todos</span>
+          <h2 class="section-title">Beneficios según tu perfil</h2>
+          <p class="section-subtitle">
+            Ya seas deportista ocasional o propietario de material, GearShare tiene algo para ti.
+          </p>
+        </div>
+        <div class="profiles-grid">
+          <div class="profile-card">
+            <span class="profile-type">Si quieres practicar deporte</span>
+            <h3>Accede sin comprar</h3>
+            <ul class="profile-benefits">
+              <li>Prueba deportes nuevos sin riesgo económico</li>
+              <li>Ahorra espacio en casa sin renunciar a nada</li>
+              <li>Encuentra material en tu destino de vacaciones</li>
+              <li>Elige entre variedad de equipamiento y precios</li>
+              <li>Garantía de calidad con sistema de valoraciones</li>
+            </ul>
+          </div>
+          <div class="profile-card">
+            <span class="profile-type">Si tienes material en casa</span>
+            <h3>Rentabiliza lo que no usas</h3>
+            <ul class="profile-benefits">
+              <li>Genera ingresos con material que tienes parado</li>
+              <li>Decide cuándo y a quién prestas tu equipamiento</li>
+              <li>Protección con seguro integrado</li>
+              <li>Ayuda a otros a disfrutar del deporte</li>
+              <li>Contribuye a un modelo de consumo sostenible</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENCUESTA CTA -->
+    <section class="survey" id="encuesta">
+      <div class="container">
+        <div class="survey-content">
+          <div class="survey-icon">📋</div>
+          <h2>Ayúdanos a crear la mejor plataforma</h2>
+          <p>
+            Estamos desarrollando GearShare y necesitamos conocer tu opinión. Completa nuestra encuesta de investigación de mercado y forma parte del futuro del deporte colaborativo.
+          </p>
+          <a href="https://imede.eu/?fluent-form=20" target="_blank" rel="noopener" class="btn btn-lg">
+            Completar encuesta (2-3 min) →
+          </a>
+          <p class="survey-note">
+            Tu participación es anónima y nos ayudará a validar y mejorar esta idea.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALORES -->
+    <section class="values">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Nuestros Valores</span>
+          <h2 class="section-title">Lo que nos mueve</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="value-icon">🤝</div>
+            <h4>Accesibilidad</h4>
+            <p>Deporte para todos, sin barreras económicas</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🌍</div>
+            <h4>Sostenibilidad</h4>
+            <p>Economía circular y consumo responsable</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🔒</div>
+            <h4>Confianza</h4>
+            <p>Seguridad y transparencia en cada préstamo</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">👥</div>
+            <h4>Comunidad</h4>
+            <p>Red colaborativa de deportistas</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">💡</div>
+            <h4>Innovación</h4>
+            <p>Soluciones digitales para nuevas necesidades</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="#" class="logo"><span>GEAR</span>SHARE</a>
+          <p>Plataforma de economía colaborativa para compartir material deportivo. Practica más, compra menos.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#problema">El Problema</a></li>
+            <li><a href="#solucion">Solución</a></li>
+            <li><a href="#como-funciona">Cómo Funciona</a></li>
+            <li><a href="#ventajas">Ventajas</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Participar</h4>
+          <ul>
+            <li><a href="https://imede.eu/?fluent-form=20" target="_blank" rel="noopener">Encuesta de validación</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Proyecto académico · Universidad de Alicante</span>
+        <span>© 2026 GearShare. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
