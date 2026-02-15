@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GearShare — Publicar material</title>
+  <meta name="description" content="Publica qué material deportivo buscas o qué tienes disponible para prestar en GearShare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --primary-light: #e0f2fe;
+      --secondary: #10b981;
+      --secondary-dark: #059669;
+      --secondary-light: #d1fae5;
+      --bg-light: #f0f9ff;
+      --bg-white: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: min(560px, 100%);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .logo span {
+      color: var(--text-dark);
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* Form Card */
+    .form-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    /* Toggle Buttons */
+    .toggle-container {
+      display: flex;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: var(--radius);
+      margin: 24px 24px 0;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .toggle-btn.active {
+      background: var(--bg-white);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toggle-btn:hover:not(.active) {
+      color: var(--text-dark);
+    }
+
+    /* Form States */
+    .form-card[data-mode="quiero"] {
+      border-top: 4px solid var(--primary);
+    }
+
+    .form-card[data-mode="tengo"] {
+      border-top: 4px solid var(--secondary);
+    }
+
+    .form-card[data-mode="tengo"] .toggle-btn.active {
+      color: var(--secondary);
+    }
+
+    .form-card[data-mode="tengo"] .form-title {
+      color: var(--secondary);
+    }
+
+    .form-card[data-mode="tengo"] .btn-submit {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.35);
+    }
+
+    .form-card[data-mode="tengo"] .btn-submit:hover {
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.45);
+    }
+
+    .form-card[data-mode="tengo"] .form-group input:focus,
+    .form-card[data-mode="tengo"] .form-group select:focus,
+    .form-card[data-mode="tengo"] .form-group textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px var(--secondary-light);
+    }
+
+    /* Form Content */
+    .form-content {
+      padding: 24px;
+    }
+
+    .form-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .form-subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .form-group label .hint {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon input {
+      padding-right: 50px;
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(14, 165, 233, 0.35);
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(14, 165, 233, 0.45);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Back Link */
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+
+    .modal-icon.success {
+      background: var(--secondary-light);
+    }
+
+    .modal h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .modal-btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--secondary);
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-btn:hover {
+      background: var(--secondary-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 16px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .toggle-container {
+        margin: 16px 16px 0;
+      }
+
+      .form-content {
+        padding: 20px 16px;
+      }
+
+      .toggle-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="page-header">
+      <a href="index.html" class="logo">GEAR<span>SHARE</span></a>
+      <p>Conectamos personas con material deportivo</p>
+    </header>
+
+    <!-- Form Card -->
+    <div class="form-card" data-mode="quiero" id="formCard">
+      <!-- Toggle Buttons -->
+      <div class="toggle-container">
+        <button type="button" class="toggle-btn active" id="btnQuiero" onclick="setMode('quiero')">
+          🔍 Quiero
+        </button>
+        <button type="button" class="toggle-btn" id="btnTengo" onclick="setMode('tengo')">
+          📦 Tengo
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form class="form-content" id="gearForm" onsubmit="handleSubmit(event)">
+        <h2 class="form-title" id="formTitle">Busco material deportivo</h2>
+        <p class="form-subtitle" id="formSubtitle">
+          Cuéntanos qué material necesitas y te ayudaremos a encontrarlo cerca de ti.
+        </p>
+
+        <!-- Tipo de deporte -->
+        <div class="form-group">
+          <label for="deporte">Tipo de deporte</label>
+          <select id="deporte" required>
+            <option value="">Selecciona un deporte</option>
+            <option value="surf">Surf</option>
+            <option value="paddle">Paddle Surf</option>
+            <option value="esqui">Esquí</option>
+            <option value="snowboard">Snowboard</option>
+            <option value="ciclismo">Ciclismo</option>
+            <option value="senderismo">Senderismo / Trekking</option>
+            <option value="camping">Camping</option>
+            <option value="kayak">Kayak / Piragüismo</option>
+            <option value="escalada">Escalada</option>
+            <option value="golf">Golf</option>
+            <option value="tenis">Tenis / Pádel</option>
+            <option value="buceo">Buceo / Snorkel</option>
+            <option value="patinaje">Patinaje</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <!-- Material específico -->
+        <div class="form-group">
+          <label for="material" id="labelMaterial">
+            ¿Qué material necesitas?
+          </label>
+          <input 
+            type="text" 
+            id="material" 
+            placeholder="Ej: Tabla de surf 7'2, neopreno talla M..."
+            required
+          />
+        </div>
+
+        <!-- Fechas -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fechaInicio" id="labelFechaInicio">Fecha inicio</label>
+            <input type="date" id="fechaInicio" required />
+          </div>
+          <div class="form-group">
+            <label for="fechaFin" id="labelFechaFin">Fecha fin</label>
+            <input type="date" id="fechaFin" required />
+          </div>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="form-group">
+          <label for="ubicacion" id="labelUbicacion">
+            Ubicación <span class="hint" id="hintUbicacion">— donde lo necesitas</span>
+          </label>
+          <input 
+            type="text" 
+            id="ubicacion" 
+            placeholder="Ej: Alicante, Madrid, Barcelona..."
+            required
+          />
+        </div>
+
+        <!-- Precio -->
+        <div class="form-group">
+          <label for="precio" id="labelPrecio">
+            Precio por día <span class="hint" id="hintPrecio">— ¿cuánto pagarías?</span>
+          </label>
+          <div class="input-with-icon">
+            <input 
+              type="number" 
+              id="precio" 
+              placeholder="15"
+              min="1"
+              required
+            />
+            <span class="input-icon">€/día</span>
+          </div>
+        </div>
+
+        <!-- Descripción adicional -->
+        <div class="form-group">
+          <label for="descripcion" id="labelDescripcion">
+            Información adicional <span class="hint">(opcional)</span>
+          </label>
+          <textarea 
+            id="descripcion" 
+            placeholder="Añade cualquier detalle relevante: talla, nivel de experiencia, preferencias..."
+          ></textarea>
+        </div>
+
+        <!-- Contacto -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Tu nombre</label>
+            <input type="text" id="nombre" placeholder="Nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email de contacto</label>
+            <input type="email" id="email" placeholder="tu@email.com" required />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          Publicar solicitud
+        </button>
+      </form>
+    </div>
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">← Volver a la página principal</a>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-icon success">✅</div>
+      <h3 id="modalTitle">¡Solicitud enviada!</h3>
+      <p id="modalText">
+        Hemos recibido tu solicitud. Te contactaremos cuando encontremos el material que buscas.
+      </p>
+      <button type="button" class="modal-btn" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script>
+    // Set minimum dates to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('fechaInicio').min = today;
+    document.getElementById('fechaFin').min = today;
+
+    // Update end date minimum when start date changes
+    document.getElementById('fechaInicio').addEventListener('change', function() {
+      document.getElementById('fechaFin').min = this.value;
+      if (document.getElementById('fechaFin').value < this.value) {
+        document.getElementById('fechaFin').value = this.value;
+      }
+    });
+
+    // Mode switching
+    function setMode(mode) {
+      const formCard = document.getElementById('formCard');
+      const btnQuiero = document.getElementById('btnQuiero');
+      const btnTengo = document.getElementById('btnTengo');
+      
+      formCard.dataset.mode = mode;
+      
+      if (mode === 'quiero') {
+        btnQuiero.classList.add('active');
+        btnTengo.classList.remove('active');
+        updateLabels('quiero');
+      } else {
+        btnTengo.classList.add('active');
+        btnQuiero.classList.remove('active');
+        updateLabels('tengo');
+      }
+    }
+
+    function updateLabels(mode) {
+      const elements = {
+        formTitle: document.getElementById('formTitle'),
+        formSubtitle: document.getElementById('formSubtitle'),
+        labelMaterial: document.getElementById('labelMaterial'),
+        labelFechaInicio: document.getElementById('labelFechaInicio'),
+        labelFechaFin: document.getElementById('labelFechaFin'),
+        labelUbicacion: document.getElementById('labelUbicacion'),
+        hintUbicacion: document.getElementById('hintUbicacion'),
+        labelPrecio: document.getElementById('labelPrecio'),
+        hintPrecio: document.getElementById('hintPrecio'),
+        labelDescripcion: document.getElementById('labelDescripcion'),
+        btnSubmit: document.getElementById('btnSubmit'),
+        material: document.getElementById('material'),
+        descripcion: document.getElementById('descripcion'),
+        modalTitle: document.getElementById('modalTitle'),
+        modalText: document.getElementById('modalText')
+      };
+
+      if (mode === 'quiero') {
+        elements.formTitle.textContent = 'Busco material deportivo';
+        elements.formSubtitle.textContent = 'Cuéntanos qué material necesitas y te ayudaremos a encontrarlo cerca de ti.';
+        elements.labelMaterial.innerHTML = '¿Qué material necesitas?';
+        elements.labelFechaInicio.textContent = 'Fecha inicio';
+        elements.labelFechaFin.textContent = 'Fecha fin';
+        elements.labelUbicacion.innerHTML = 'Ubicación <span class="hint" id="hintUbicacion">— donde lo necesitas</span>';
+        elements.labelPrecio.innerHTML = 'Precio por día <span class="hint" id="hintPrecio">— ¿cuánto pagarías?</span>';
+        elements.labelDescripcion.innerHTML = 'Información adicional <span class="hint">(opcional)</span>';
+        elements.btnSubmit.textContent = 'Publicar solicitud';
+        elements.material.placeholder = 'Ej: Tabla de surf 7\'2, neopreno talla M...';
+        elements.descripcion.placeholder = 'Añade cualquier detalle relevante: talla, nivel de experiencia, preferencias...';
+        elements.modalTitle.textContent = '¡Solicitud enviada!';
+        elements.modalText.textContent = 'Hemos recibido tu solicitud. Te contactaremos cuando encontremos el material que buscas.';
+      } else {
+        elements.formTitle.textContent = 'Tengo material para prestar';
+        elements.formSubtitle.textContent = 'Publica el material que tienes disponible y empieza a generar ingresos.';
+        elements.labelMaterial.innerHTML = '¿Qué material ofreces?';
+        elements.labelFechaInicio.textContent = 'Disponible desde';
+        elements.labelFechaFin.textContent = 'Disponible hasta';
+        elements.labelUbicacion.innerHTML = 'Ubicación <span class="hint" id="hintUbicacion">— donde está el material</span>';
+        elements.labelPrecio.innerHTML = 'Precio por día <span class="hint" id="hintPrecio">— ¿cuánto cobrarías?</span>';
+        elements.labelDescripcion.innerHTML = 'Descripción del material <span class="hint">(opcional)</span>';
+        elements.btnSubmit.textContent = 'Publicar oferta';
+        elements.material.placeholder = 'Ej: Tabla de surf 7\'2 en buen estado, neopreno 3/2mm...';
+        elements.descripcion.placeholder = 'Describe el estado del material, accesorios incluidos, condiciones de uso...';
+        elements.modalTitle.textContent = '¡Oferta publicada!';
+        elements.modalText.textContent = 'Tu material ya está visible. Te contactaremos cuando alguien esté interesado.';
+      }
+    }
+
+    // Form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      // Show modal
+      document.getElementById('modalOverlay').classList.add('active');
+      
+      // Reset form
+      document.getElementById('gearForm').reset();
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
