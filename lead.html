@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GearShare — Bienvenido</title>
+  <meta name="description" content="Gracias por escanear el QR de GearShare. Regístrate para estar al día de la plataforma de préstamo de material deportivo entre particulares." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --primary-light: #e0f2fe;
+      --secondary: #10b981;
+      --secondary-dark: #059669;
+      --secondary-light: #d1fae5;
+      --bg-light: #f0f9ff;
+      --bg-white: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+      --shadow-primary: 0 8px 30px rgba(14, 165, 233, 0.35);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: min(560px, 100%);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .logo span {
+      color: var(--text-dark);
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* Thank You Section */
+    .thankyou-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 40px 32px;
+      text-align: center;
+      margin-bottom: 24px;
+      border-top: 4px solid var(--secondary);
+    }
+
+    .thankyou-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--secondary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 20px;
+    }
+
+    .thankyou-card h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+
+    .thankyou-card p {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .thankyou-card p strong {
+      color: var(--primary);
+    }
+
+    /* Lead Form Card */
+    .lead-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border-top: 4px solid var(--primary);
+    }
+
+    .lead-content {
+      padding: 32px;
+    }
+
+    .lead-content h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .lead-content .lead-subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      transition: all 0.2s ease;
+    }
+
+    .form-group input[type="email"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .form-group input[type="email"]::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-group input[type="email"].input-error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px #fee2e2;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error-message.visible {
+      display: block;
+    }
+
+    /* Consent Checkbox */
+    .consent-group {
+      margin-bottom: 24px;
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .consent-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .consent-label.consent-error {
+      color: #ef4444;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(14, 165, 233, 0.45);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Back Link */
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+
+    .modal-icon.success {
+      background: var(--secondary-light);
+    }
+
+    .modal-icon.error {
+      background: #fee2e2;
+    }
+
+    .modal h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .modal-btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--secondary);
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-btn:hover {
+      background: var(--secondary-dark);
+    }
+
+    .modal-btn.error-btn {
+      background: var(--primary);
+    }
+
+    .modal-btn.error-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Prize Modal */
+    .modal-icon.prize {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+    }
+
+    .prize-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .modal-btn.prize-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    .modal-btn.prize-btn:hover {
+      background: #b45309;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(60px) rotate(360deg); opacity: 0; }
+    }
+
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confetti-fall 1.5s ease-out forwards;
+    }
+
+    /* Hint text */
+    .hint-text {
+      font-size: 13px;
+      color: #f59e0b;
+      font-style: italic;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 16px;
+      }
+
+      .thankyou-card {
+        padding: 32px 20px;
+      }
+
+      .lead-content {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="page-header">
+      <a href="index.html" class="logo">GEAR<span>SHARE</span></a>
+      <p>Alquiler de material deportivo entre particulares</p>
+    </header>
+
+    <!-- Thank You Section -->
+    <section class="thankyou-card">
+      <div class="thankyou-icon">&#127941;</div>
+      <h2>Gracias por tu curiosidad</h2>
+      <p>
+        Has escaneado nuestro QR y eso significa que te interesa el deporte tanto como a nosotros. <strong>GearShare</strong> es una plataforma que conecta a personas para compartir material deportivo: ahorra dinero, reduce residuos y prueba nuevos deportes sin comprar equipamiento.
+      </p>
+    </section>
+
+    <!-- Lead Form Card -->
+    <section class="lead-card">
+      <div class="lead-content">
+        <h2>Mantente informado</h2>
+        <p class="lead-subtitle">
+          Estamos preparando el lanzamiento. Deja tu correo y te avisaremos cuando GearShare esté disponible. Sin spam, solo novedades importantes.
+        </p>
+        <p class="hint-text">Pista: igual te sorprendes antes de lo que piensas.</p>
+
+        <form id="leadForm" novalidate>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="tu@email.com"
+              autocomplete="email"
+              required
+            />
+            <p class="error-message" id="emailError">Introduce un correo electrónico válido.</p>
+          </div>
+
+          <div class="consent-group">
+            <label class="consent-label" id="consentLabel">
+              <input type="checkbox" id="consent" required />
+              Acepto recibir comunicaciones de GearShare sobre el lanzamiento de la plataforma y novedades relacionadas.
+            </label>
+            <p class="error-message" id="consentError">Debes aceptar para poder continuar.</p>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btnSubmit">
+            Quiero estar al tanto
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">&#8592; Descubre más sobre GearShare</a>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modalSuccess">
+    <div class="modal">
+      <div class="modal-icon success">&#9989;</div>
+      <h3>Te has registrado correctamente</h3>
+      <p>Te enviaremos un correo cuando GearShare esté listo para que puedas compartir y encontrar material deportivo cerca de ti.</p>
+      <button type="button" class="modal-btn" onclick="closeModal('modalSuccess')">Entendido</button>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div class="modal-overlay" id="modalError">
+    <div class="modal">
+      <div class="modal-icon error">&#10060;</div>
+      <h3 id="errorTitle">Ha ocurrido un error</h3>
+      <p id="errorText">No hemos podido registrar tu correo. Por favor, inténtalo de nuevo más tarde.</p>
+      <button type="button" class="modal-btn error-btn" onclick="closeModal('modalError')">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Prize Modal (Easter Egg) -->
+  <div class="modal-overlay" id="modalPrize">
+    <div class="modal" style="position:relative; overflow:hidden;">
+      <div class="confetti-container" id="confettiContainer"></div>
+      <div class="modal-icon prize">&#127942;</div>
+      <span class="prize-badge">Ganador</span>
+      <h3 id="prizeTitle">&#127881; Has sido seleccionado</h3>
+      <p id="prizeText">Enhorabuena, formas parte de los primeros usuarios premiados de GearShare. Te contactaremos con los detalles de tu premio.</p>
+      <button type="button" class="modal-btn prize-btn" onclick="closeModal('modalPrize')">Genial</button>
+    </div>
+  </div>
+
+  <script>
+    var WORKER_URL = 'https://gear-share.cao-gq.workers.dev/';
+
+    var form = document.getElementById('leadForm');
+    var emailInput = document.getElementById('email');
+    var emailError = document.getElementById('emailError');
+    var consentInput = document.getElementById('consent');
+    var consentError = document.getElementById('consentError');
+    var consentLabel = document.getElementById('consentLabel');
+    var btnSubmit = document.getElementById('btnSubmit');
+
+    // Email regex (standard validation)
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateEmail() {
+      var value = emailInput.value.trim();
+      if (!value || !emailRegex.test(value)) {
+        emailInput.classList.add('input-error');
+        emailError.classList.add('visible');
+        return false;
+      }
+      emailInput.classList.remove('input-error');
+      emailError.classList.remove('visible');
+      return true;
+    }
+
+    function validateConsent() {
+      if (!consentInput.checked) {
+        consentLabel.classList.add('consent-error');
+        consentError.classList.add('visible');
+        return false;
+      }
+      consentLabel.classList.remove('consent-error');
+      consentError.classList.remove('visible');
+      return true;
+    }
+
+    // Clear errors on interaction
+    emailInput.addEventListener('input', function () {
+      emailInput.classList.remove('input-error');
+      emailError.classList.remove('visible');
+    });
+
+    consentInput.addEventListener('change', function () {
+      consentLabel.classList.remove('consent-error');
+      consentError.classList.remove('visible');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var isEmailValid = validateEmail();
+      var isConsentValid = validateConsent();
+
+      if (!isEmailValid || !isConsentValid) {
+        return;
+      }
+
+      var email = emailInput.value.trim();
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Enviando...';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            return response.text().then(function (text) {
+              throw new Error(text || 'Error del servidor');
+            });
+          }
+          return response.json().catch(function () {
+            return { ok: true };
+          });
+        })
+        .then(function (data) {
+          form.reset();
+          if (data && data.premio === true) {
+            if (data.mensaje) {
+              document.getElementById('prizeText').textContent = data.mensaje;
+            }
+            launchConfetti();
+            openModal('modalPrize');
+          } else {
+            openModal('modalSuccess');
+          }
+        })
+        .catch(function (err) {
+          var errorText = document.getElementById('errorText');
+          if (err.message && err.message.toLowerCase().indexOf('unique') !== -1) {
+            errorText.textContent = 'Este correo ya está registrado. Te avisaremos cuando lancemos la plataforma.';
+          } else {
+            errorText.textContent = 'No hemos podido registrar tu correo. Por favor, inténtalo de nuevo más tarde.';
+          }
+          openModal('modalError');
+        })
+        .finally(function () {
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Quiero estar al tanto';
+        });
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+      overlay.addEventListener('click', function (e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+        }
+      });
+    });
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(function (m) {
+          m.classList.remove('active');
+        });
+      }
+    });
+
+    // Confetti animation for prize modal
+    function launchConfetti() {
+      var container = document.getElementById('confettiContainer');
+      container.innerHTML = '';
+      var colors = ['#f59e0b', '#ef4444', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
+      for (var i = 0; i < 30; i++) {
+        var confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 0.8 + 's';
+        confetti.style.animationDuration = (1 + Math.random()) + 's';
+        container.appendChild(confetti);
+      }
+    }
+  </script>
+</body>
+</html>
