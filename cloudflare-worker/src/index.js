@@ -2,7 +2,7 @@ import { createClient } from '@libsql/client';
 
 // Configuración de CORS
 const corsHeaders = {
-  'Access-Control-Allow-Origin': CORS_ORIGIN,
+  'Access-Control-Allow-Origin': 'https://jjmb10-ua.github.io',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
