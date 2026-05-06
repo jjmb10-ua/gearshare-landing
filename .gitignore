@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since only a markdown file (ARQUITECTURA_Y_PLAN.md) was added, which is a source/config file and should not be ignored.
+Nothing should be ignored based on the provided file changes. The only file added is a markdown document file (`DOCUMENTO_ARQUITECTURA.md`), which is a source/config file and should not be ignored. There are no build artifacts, dependencies, or temporary files in the changes.
