@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.3"
   }
 }
