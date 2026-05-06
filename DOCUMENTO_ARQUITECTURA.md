@@ -62,7 +62,52 @@ graph TD
 
 ---
 
-## 4. Fases de Implementación Detallada
+## 4. Funciones del Cloudflare Worker (Backend API)
+
+El Worker actuará como una API RESTful segura. Se implementarán las siguientes rutas y funciones:
+
+### 4.1. Estructura de Rutas
+
+| Método | Ruta | Descripción | Acceso |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/ofertas` | Listar ofertas (con paginación y filtros) | Público |
+| `GET` | `/api/ofertas/:id` | Obtener detalle de una oferta | Público |
+| `POST` | `/api/ofertas` | Crear nueva oferta (texto + imágenes) | Público (con validación) |
+| `PUT` | `/api/ofertas/:id` | Actualizar oferta existente | Privado (Token) |
+| `DELETE` | `/api/ofertas/:id` | Eliminar oferta | Privado (Token) |
+| `POST` | `/api/upload` | Subida directa de imagen a R2 (URL firmada) | Privado (Token) |
+
+### 4.2. Detalle de Implementación de Funciones
+
+#### A. `handleGetOfertas(request)`
+*   **Lógica:** Conecta a Turso, ejecuta `SELECT * FROM ofertas ORDER BY created_at DESC LIMIT ? OFFSET ?`.
+*   **Respuesta:** JSON con array de ofertas y metadatos de paginación.
+*   **Seguridad:** Sin restricciones, pero con rate limiting (ej. 100 req/min por IP).
+
+#### B. `handleCreateOferta(request)`
+*   **Lógica:**
+    1.  Valida datos de entrada (título, descripción, precio, tipo, ubicación).
+    2.  Procesa imágenes adjuntas (si vienen en base64 o multipart):
+        *   Genera ID único para cada imagen.
+        *   Sube la imagen a Bucket R2 (`ofertas/{id}/{imagen}`).
+        *   Guarda URLs públicas en la DB.
+    3.  Inserta registro en Turso.
+*   **Seguridad:** Validación estricta de tipos de archivo (solo jpg, png, webp) y tamaño máximo (ej. 5MB).
+
+#### C. `handleUploadUrl(request)` (Opcional - Para subidas grandes)
+*   **Lógica:** Genera una URL firmada de R2 para que el frontend suba la imagen directamente (ahorra ancho de banda al Worker).
+*   **Uso:** El frontend pide URL -> Worker devuelve URL firmada -> Frontend hace PUT a R2 directamente.
+
+#### D. `handleAuth(request)` (Gestión de Admin)
+*   **Lógica:** Verifica un token simple (Bearer Token) en las cabeceras para operaciones de escritura/edición.
+*   **Implementación:** Middleware que chequea `Authorization: Bearer <TOKEN_SECRETO>` antes de ejecutar POST/PUT/DELETE.
+
+### 4.3. Consideraciones Técnicas del Worker
+*   **CORS:** Configurar cabeceras `Access-Control-Allow-Origin` para aceptar peticiones solo desde `https://tu-usuario.github.io`.
+*   **Entorno:** Uso de `env.TURSO_DATABASE_URL`, `env.TURSO_AUTH_TOKEN`, `env.R2_BUCKET` inyectados vía `wrangler.toml`.
+*   **Errores:** Bloque `try/catch` global para devolver errores estandarizados (400, 401, 500).
+
+## 5. Fases de Implementación Detallada
 
 ### Fase 1: Configuración del Entorno (30 min)
 **Objetivo:** Tener las cuentas creadas y el entorno local listo.
