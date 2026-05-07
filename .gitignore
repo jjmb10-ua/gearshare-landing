@@ -1,16 +1,19 @@
 ```
 # Dependencies
 node_modules/
-package-lock.json
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Logs
+*.log
 
 # Environment
 .env
 .env.local
-*.env.*
-
-# Logs and temp files
-*.log
-*.tmp
+.env.*
 
 # Editors
 .vscode/
@@ -22,12 +25,27 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Build outputs
-dist/
-build/
-*.egg-info/
+# Temporary files
+*.tmp
+*.swp
+*.swo
 
-# Compression
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# MyPy
+.mypy_cache/
+
+# PyTest
+.pytest_cache/
+
+# Compressed files
 *.zip
 *.gz
 *.tar
