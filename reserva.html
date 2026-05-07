@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Reservar Material — GearShare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0ea5e9; --primary-dark: #0284c7; --secondary: #10b981;
+      --bg-light: #f0f9ff; --bg-white: #ffffff; --text-dark: #0f172a;
+      --text-muted: #64748b; --border: rgba(15,23,42,0.08);
+      --radius: 16px; --radius-lg: 24px;
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card { background: var(--bg-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); max-width: 480px; width: 100%; padding: 32px; text-align: center; }
+    .badge { display: inline-block; background: rgba(14,165,233,0.1); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+    .info-box { background: var(--bg-light); border-radius: var(--radius); padding: 16px; margin-bottom: 24px; text-align: left; }
+    .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+    .info-row:last-child { margin-bottom: 0; font-weight: 700; color: var(--secondary); font-size: 16px; border-top: 1px dashed var(--border); padding-top: 8px; margin-top: 8px; }
+    .form-group { margin-bottom: 16px; text-align: left; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 12px 14px; border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; min-height: 44px; }
+    .form-group input:focus { outline: none; border-color: var(--primary); }
+    .btn-reserve { width: 100%; padding: 14px; border: none; border-radius: var(--radius); background: linear-gradient(135deg, var(--secondary), #059669); color: white; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; min-height: 48px; margin-top: 8px; }
+    .btn-reserve:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.35); }
+    .btn-reserve:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .back-link { display: inline-block; margin-top: 20px; color: var(--text-muted); font-size: 14px; text-decoration: none; font-weight: 500; }
+    .back-link:hover { color: var(--primary); }
+    .demo-notice { font-size: 11px; color: var(--text-muted); margin-top: 12px; background: #fef3c7; padding: 8px; border-radius: 8px; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000; padding: 20px; }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal { background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px; text-align: center; max-width: 380px; width: 100%; transform: scale(0.9); transition: transform 0.3s; }
+    .modal-overlay.active .modal { transform: scale(1); }
+    .modal-icon { font-size: 48px; margin-bottom: 16px; }
+    .modal h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .modal p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+    .modal-btn { padding: 12px 24px; border: none; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">📦 DEMO DE RESERVA</span>
+    <h1 id="materialName">Cargando...</h1>
+    <p class="subtitle">Completa tus datos para simular la reserva</p>
+    
+    <div class="info-box">
+      <div class="info-row"><span>Propietario</span><span id="ownerName">-</span></div>
+      <div class="info-row"><span>Precio total</span><span id="totalPrice">-</span></div>
+    </div>
+
+    <form id="reserveForm" onsubmit="handleFakeReserve(event)">
+      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required /></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="tu@email.com" required /></div>
+      <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="+34 600 000 000" required /></div>
+      <button type="submit" class="btn-reserve" id="btnSubmit">Confirmar Reserva (Demo)</button>
+    </form>
+
+    <p class="demo-notice">⚠️ Esto es una demostración. No se procesan pagos ni se envían datos reales.</p>
+    <a href="formulario.html?tab=buscar" class="back-link">← Volver al buscador</a>
+  </div>
+
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal-icon">✅</div>
+      <h2>¡Reserva simulada!</h2>
+      <p>En un entorno real, aquí se procesaría el pago y se notificaría al propietario.</p>
+      <button class="modal-btn" onclick="window.location.href='formulario.html?tab=buscar'">Entendido</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const material = params.get('material') || 'Material deportivo';
+    const price = params.get('price') || '0.00';
+    const owner = params.get('owner') || 'Propietario';
+
+    document.getElementById('materialName').textContent = decodeURIComponent(material);
+    document.getElementById('totalPrice').textContent = `${decodeURIComponent(price)}€`;
+    document.getElementById('ownerName').textContent = decodeURIComponent(owner);
+
+    function handleFakeReserve(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.textContent = 'Procesando...';
+      
+      setTimeout(() => {
+        document.getElementById('successModal').classList.add('active');
+        btn.disabled = false;
+        btn.textContent = 'Confirmar Reserva (Demo)';
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

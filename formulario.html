@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GearShare — Publicar material</title>
-  <meta name="description" content="Publica qué material deportivo buscas o qué tienes disponible para prestar en GearShare." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>GearShare — Encuentra y comparte material deportivo</title>
+  <meta name="description" content="Alquila material deportivo cerca de ti o publica el tuyo para ganar dinero." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,651 +13,484 @@
     :root {
       --primary: #0ea5e9;
       --primary-dark: #0284c7;
-      --primary-light: #e0f2fe;
       --secondary: #10b981;
-      --secondary-dark: #059669;
-      --secondary-light: #d1fae5;
+      --accent: #f59e0b;
       --bg-light: #f0f9ff;
       --bg-white: #ffffff;
       --text-dark: #0f172a;
       --text-muted: #64748b;
-      --border: rgba(15, 23, 42, 0.12);
+      --text-light: #94a3b8;
+      --border: rgba(15, 23, 42, 0.08);
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
       --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
       --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
-      --radius: 12px;
-      --radius-lg: 20px;
+      --shadow-primary: 0 8px 30px rgba(14, 165, 233, 0.35);
+      --radius: 16px;
+      --radius-lg: 24px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--text-dark);
-      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .container {
-      width: min(560px, 100%);
-      margin: 0 auto;
-    }
-
-    /* Header */
-    .page-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--primary);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-      display: inline-block;
-      margin-bottom: 8px;
-    }
-
-    .logo span {
-      color: var(--text-dark);
-    }
-
-    .page-header p {
-      color: var(--text-muted);
-      font-size: 15px;
-    }
-
-    /* Form Card */
-    .form-card {
       background: var(--bg-white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    /* Toggle Buttons */
-    .toggle-container {
-      display: flex;
-      background: #f1f5f9;
-      padding: 6px;
-      border-radius: var(--radius);
-      margin: 24px 24px 0;
-    }
-
-    .toggle-btn {
-      flex: 1;
-      padding: 14px 20px;
-      border: none;
-      background: transparent;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .toggle-btn.active {
-      background: var(--bg-white);
-      color: var(--primary);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .toggle-btn:hover:not(.active) {
-      color: var(--text-dark);
-    }
-
-    /* Form States */
-    .form-card[data-mode="quiero"] {
-      border-top: 4px solid var(--primary);
-    }
-
-    .form-card[data-mode="tengo"] {
-      border-top: 4px solid var(--secondary);
-    }
-
-    .form-card[data-mode="tengo"] .toggle-btn.active {
-      color: var(--secondary);
-    }
-
-    .form-card[data-mode="tengo"] .form-title {
-      color: var(--secondary);
-    }
-
-    .form-card[data-mode="tengo"] .btn-submit {
-      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.35);
-    }
-
-    .form-card[data-mode="tengo"] .btn-submit:hover {
-      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.45);
-    }
-
-    .form-card[data-mode="tengo"] .form-group input:focus,
-    .form-card[data-mode="tengo"] .form-group select:focus,
-    .form-card[data-mode="tengo"] .form-group textarea:focus {
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 3px var(--secondary-light);
-    }
-
-    /* Form Content */
-    .form-content {
-      padding: 24px;
-    }
-
-    .form-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 8px;
-      transition: color 0.3s ease;
-    }
-
-    .form-subtitle {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 28px;
-      line-height: 1.5;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-    }
-
-    .form-group label .hint {
-      font-weight: 400;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 15px;
-      color: var(--text-dark);
-      background: var(--bg-white);
-      transition: all 0.2s ease;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-light);
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: #94a3b8;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .input-with-icon {
-      position: relative;
-    }
-
-    .input-with-icon input {
-      padding-right: 50px;
-    }
-
-    .input-icon {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* Submit Button */
-    .btn-submit {
-      width: 100%;
-      padding: 16px 24px;
-      border: none;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 30px rgba(14, 165, 233, 0.35);
-      margin-top: 8px;
-    }
-
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(14, 165, 233, 0.45);
-    }
-
-    .btn-submit:active {
-      transform: translateY(0);
-    }
-
-    /* Back Link */
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 24px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .back-link:hover {
-      color: var(--primary);
-    }
-
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      background: var(--bg-white);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .modal-overlay.active .modal {
-      transform: scale(1);
-    }
-
-    .modal-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      margin: 0 auto 20px;
-    }
-
-    .modal-icon.success {
-      background: var(--secondary-light);
-    }
-
-    .modal h3 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .modal p {
-      color: var(--text-muted);
-      font-size: 15px;
       line-height: 1.6;
-      margin-bottom: 28px;
+      -webkit-tap-highlight-color: transparent;
     }
 
+    .container { width: min(1200px, 100%); margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border); z-index: 1000;
+    }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; }
+    .logo { font-size: 22px; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--text-dark); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none;
+      min-height: 44px; /* Touch target */
+    }
+    .btn-primary { background: var(--primary); color: white; box-shadow: var(--shadow-primary); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* MAIN */
+    main { padding: 100px 0 60px; background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%); min-height: 100vh; }
+    .page-header { text-align: center; margin-bottom: 32px; }
+    .page-header h1 { font-size: clamp(24px, 5vw, 36px); font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
+    .page-header p { color: var(--text-muted); font-size: 16px; }
+
+    /* TABS */
+    .tabs {
+      display: flex; justify-content: center; gap: 6px;
+      background: rgba(255,255,255,0.7); border: 1px solid var(--border);
+      border-radius: 14px; padding: 6px; margin-bottom: 32px;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+    .tab {
+      flex: 1; padding: 12px 16px; border: none; background: transparent;
+      font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text-muted);
+      cursor: pointer; border-radius: 10px; transition: all 0.3s ease; min-height: 44px;
+    }
+    .tab.active { background: var(--primary); color: white; box-shadow: var(--shadow-primary); }
+    .tab:not(.active):hover { background: rgba(14,165,233,0.1); color: var(--primary); }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--bg-white); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg); overflow: hidden; border-top: 4px solid var(--primary);
+    }
+    .form-card[data-mode="publicar"] { border-top-color: var(--secondary); }
+    .form-content { padding: 32px; }
+    .form-title { font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+    .form-card[data-mode="publicar"] .form-title { color: var(--secondary); }
+    .form-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .form-group.full-width { grid-column: 1 / -1; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+    .form-group label .hint { font-weight: 400; color: var(--text-muted); }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 14px; border: 2px solid var(--border); border-radius: var(--radius);
+      font-family: inherit; font-size: 15px; color: var(--text-dark); background: var(--bg-white);
+      transition: all 0.2s ease; min-height: 44px;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .input-with-icon { position: relative; }
+    .input-with-icon input { padding-right: 65px; }
+    .input-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; font-weight: 600; pointer-events: none; }
+
+    .btn-submit {
+      width: 100%; margin-top: 24px; padding: 14px; border: none; border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white;
+      font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: var(--shadow-primary); min-height: 48px;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(14,165,233,0.45); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .form-card[data-mode="publicar"] .btn-submit {
+      background: linear-gradient(135deg, var(--secondary), #059669);
+      box-shadow: 0 8px 30px rgba(16,185,129,0.35);
+    }
+
+    /* FILE UPLOAD MOBILE OPTIMIZED */
+    .file-upload-wrapper {
+      border: 2px dashed var(--border); border-radius: var(--radius); padding: 20px;
+      text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg-light);
+      position: relative; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .file-upload-wrapper:hover { border-color: var(--primary); background: rgba(14,165,233,0.05); }
+    .file-upload-wrapper input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .file-upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .file-upload-text { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .file-upload-hint { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+    .file-preview {
+      width: 100%; max-height: 180px; object-fit: contain; border-radius: 8px; margin-top: 12px; display: none;
+    }
+    .file-upload-wrapper.has-file .file-upload-icon,
+    .file-upload-wrapper.has-file .file-upload-text,
+    .file-upload-wrapper.has-file .file-upload-hint { display: none; }
+    .file-upload-wrapper.has-file .file-preview { display: block; }
+
+    /* RESULTS */
+    .results-section { display: none; }
+    .results-section.active { display: block; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .result-card {
+      background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); cursor: pointer; position: relative;
+    }
+    .result-card:hover { box-shadow: var(--shadow-md); transform: translateY(-6px); border-color: rgba(14,165,233,0.3); }
+    .result-image-wrapper { position: relative; width: 100%; height: 180px; overflow: hidden; background: var(--bg-light); }
+    .result-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .result-card:hover .result-image { transform: scale(1.05); }
+    .result-sport-badge {
+      position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.95); color: var(--primary);
+      padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .result-content { padding: 16px; }
+    .result-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text-dark); line-height: 1.3; }
+    .result-location { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 4px; }
+    .result-price { font-size: 22px; font-weight: 800; color: var(--secondary); margin-bottom: 10px; }
+    .result-price .label { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+    .result-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--primary); transition: color 0.2s; }
+    .result-card:hover .result-cta { color: var(--primary-dark); }
+
+    .no-results { text-align: center; padding: 50px 20px; color: var(--text-muted); }
+    .no-results-icon { font-size: 42px; margin-bottom: 12px; }
+    .no-results h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+
+    /* MODALS */
+    .modal-overlay, #detailModalOverlay {
+      position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+      transition: all 0.3s ease; z-index: 2000; padding: 20px;
+    }
+    .modal-overlay.active, #detailModalOverlay.active { opacity: 1; visibility: visible; }
+    .modal-overlay { z-index: 3000; }
+
+    .modal, .detail-modal {
+      background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px;
+      text-align: center; max-width: 420px; width: 100%; transform: scale(0.9);
+      transition: transform 0.3s ease; box-shadow: var(--shadow-lg); position: relative;
+    }
+    .modal-overlay.active .modal, #detailModalOverlay.active .detail-modal { transform: scale(1); }
+    .detail-modal { max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 0; text-align: left; }
+
+    .modal-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 20px; }
+    .modal-icon.success { background: rgba(16,185,129,0.15); }
+    .modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .modal p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
     .modal-btn {
-      padding: 14px 32px;
-      border: none;
-      border-radius: var(--radius);
-      background: var(--secondary);
-      color: white;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      padding: 12px 28px; border: none; border-radius: var(--radius); background: var(--secondary);
+      color: white; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; min-height: 44px;
     }
+    .modal-btn:hover { background: #059669; }
 
-    .modal-btn:hover {
-      background: var(--secondary-dark);
+    .modal-close {
+      position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: none; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
+    .modal-image { width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .modal-body { padding: 24px; }
+    .modal-sport-badge { display: inline-block; background: rgba(14,165,233,0.1); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+    .modal-title { font-size: 24px; font-weight: 800; margin-bottom: 6px; color: var(--text-dark); }
+    .modal-meta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; color: var(--text-muted); font-size: 13px; }
+    .modal-meta span { display: flex; align-items: center; gap: 5px; }
+    .modal-description { color: var(--text-dark); line-height: 1.6; margin-bottom: 20px; white-space: pre-wrap; font-size: 14px; }
+    .modal-price-box { background: var(--bg-light); border-radius: var(--radius); padding: 16px; margin-bottom: 20px; }
+    .modal-price-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; color: var(--text-muted); }
+    .modal-price-row.total { font-size: 16px; font-weight: 700; color: var(--text-dark); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; margin-bottom: 0; }
+    .modal-contact-btn {
+      width: 100%; padding: 14px; border: none; border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white;
+      font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+      text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px;
+    }
+    .modal-contact-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-primary); }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      body {
-        padding: 20px 16px;
-      }
+    /* FOOTER */
+    footer { background: #0f172a; color: white; padding: 32px 0 24px; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-content .logo { color: white; }
+    .footer-content .logo span { color: var(--primary); }
+    .footer-content p { color: rgba(255,255,255,0.5); font-size: 13px; }
 
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .toggle-container {
-        margin: 16px 16px 0;
-      }
-
-      .form-content {
-        padding: 20px 16px;
-      }
-
-      .toggle-btn {
-        padding: 12px 16px;
-        font-size: 14px;
-      }
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .form-grid { grid-template-columns: 1fr; gap: 16px; }
+      .results-grid { grid-template-columns: 1fr; }
+      .tabs { flex-direction: row; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .tab { min-width: 120px; }
+      .form-content { padding: 20px; }
+      .modal, .detail-modal { max-width: 100%; max-height: 100%; border-radius: 0; margin: 0; }
+      .modal-body { padding: 20px; }
+      .modal-image { height: 200px; }
+      .page-header h1 { font-size: 26px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header class="page-header">
-      <a href="index.html" class="logo">GEAR<span>SHARE</span></a>
-      <p>Conectamos personas con material deportivo</p>
-    </header>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">GEAR<span>SHARE</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#como-funciona">Cómo Funciona</a></li>
+        </ul>
+        <a href="formulario.html" class="btn btn-primary">Publicar / Buscar</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Form Card -->
-    <div class="form-card" data-mode="quiero" id="formCard">
-      <!-- Toggle Buttons -->
-      <div class="toggle-container">
-        <button type="button" class="toggle-btn active" id="btnQuiero" onclick="setMode('quiero')">
-          🔍 Quiero
-        </button>
-        <button type="button" class="toggle-btn" id="btnTengo" onclick="setMode('tengo')">
-          📦 Tengo
-        </button>
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Encuentra y comparte material deportivo</h1>
+        <p>Alquila cerca de ti o publica el tuyo para ganar dinero</p>
       </div>
 
-      <!-- Form -->
-      <form class="form-content" id="gearForm" onsubmit="handleSubmit(event)">
-        <h2 class="form-title" id="formTitle">Busco material deportivo</h2>
-        <p class="form-subtitle" id="formSubtitle">
-          Cuéntanos qué material necesitas y te ayudaremos a encontrarlo cerca de ti.
-        </p>
+      <div class="tabs">
+        <button type="button" class="tab active" data-tab="buscar">🔍 Buscar</button>
+        <button type="button" class="tab" data-tab="publicar">📦 Publicar</button>
+      </div>
 
-        <!-- Tipo de deporte -->
-        <div class="form-group">
-          <label for="deporte">Tipo de deporte</label>
-          <select id="deporte" required>
-            <option value="">Selecciona un deporte</option>
-            <option value="surf">Surf</option>
-            <option value="paddle">Paddle Surf</option>
-            <option value="esqui">Esquí</option>
-            <option value="snowboard">Snowboard</option>
-            <option value="ciclismo">Ciclismo</option>
-            <option value="senderismo">Senderismo / Trekking</option>
-            <option value="camping">Camping</option>
-            <option value="kayak">Kayak / Piragüismo</option>
-            <option value="escalada">Escalada</option>
-            <option value="golf">Golf</option>
-            <option value="tenis">Tenis / Pádel</option>
-            <option value="buceo">Buceo / Snorkel</option>
-            <option value="patinaje">Patinaje</option>
-            <option value="otro">Otro</option>
-          </select>
+      <section id="buscar-section" class="results-section active">
+        <div class="form-card" style="margin-bottom: 32px;">
+          <form class="form-content" id="searchForm" onsubmit="handleSearch(event)">
+            <h2 class="form-title">Busca material</h2>
+            <p class="form-subtitle">Filtra por deporte, fechas y presupuesto</p>
+            <div class="form-grid">
+              <div class="form-group"><label for="search-sport">Deporte</label><select id="search-sport" name="sport"><option value="">Todos</option><option value="surf">Surf</option><option value="esquí">Esquí</option><option value="snowboard">Snowboard</option><option value="ciclismo">Ciclismo</option><option value="montañismo">Montañismo</option><option value="escalada">Escalada</option><option value="kayak">Kayak</option></select></div>
+              <div class="form-group"><label for="search-material">Material</label><input type="text" id="search-material" name="material" placeholder="Tabla, bici, esquís..." /></div>
+              <div class="form-group"><label for="search-date-start">Desde</label><input type="date" id="search-date-start" name="date_start" /></div>
+              <div class="form-group"><label for="search-date-end">Hasta</label><input type="date" id="search-date-end" name="date_end" /></div>
+              <div class="form-group"><label for="search-location">Ubicación</label><input type="text" id="search-location" name="location" placeholder="Ciudad o zona" /></div>
+              <div class="form-group"><label for="search-budget">Presupuesto max.</label><div class="input-with-icon"><input type="number" id="search-budget" name="max_budget" placeholder="50" /><span class="input-icon">€/alq</span></div></div>
+            </div>
+            <button type="submit" class="btn-submit">Buscar</button>
+          </form>
         </div>
 
-        <!-- Material específico -->
-        <div class="form-group">
-          <label for="material" id="labelMaterial">
-            ¿Qué material necesitas?
-          </label>
-          <input 
-            type="text" 
-            id="material" 
-            placeholder="Ej: Tabla de surf 7'2, neopreno talla M..."
-            required
-          />
-        </div>
-
-        <!-- Fechas -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fechaInicio" id="labelFechaInicio">Fecha inicio</label>
-            <input type="date" id="fechaInicio" required />
-          </div>
-          <div class="form-group">
-            <label for="fechaFin" id="labelFechaFin">Fecha fin</label>
-            <input type="date" id="fechaFin" required />
+        <div id="results-container">
+          <h3 style="margin-bottom: 20px; font-size: 18px; font-weight: 700;">Resultados</h3>
+          <div id="results-grid" class="results-grid">
+            <div class="no-results"><div class="no-results-icon">🔍</div><h3>Sin resultados</h3><p>Usa el formulario para buscar material disponible</p></div>
           </div>
         </div>
+      </section>
 
-        <!-- Ubicación -->
-        <div class="form-group">
-          <label for="ubicacion" id="labelUbicacion">
-            Ubicación <span class="hint" id="hintUbicacion">— donde lo necesitas</span>
-          </label>
-          <input 
-            type="text" 
-            id="ubicacion" 
-            placeholder="Ej: Alicante, Madrid, Barcelona..."
-            required
-          />
+      <section id="publicar-section" class="results-section">
+        <div class="form-card" data-mode="publicar">
+          <form class="form-content" id="publishForm" onsubmit="handlePublish(event)" enctype="multipart/form-data">
+            <h2 class="form-title">Publica tu material</h2>
+            <p class="form-subtitle">Añade tu equipo y empieza a ganar</p>
+            <div class="form-grid">
+              <div class="form-group"><label for="pub-sport">Deporte</label><select id="pub-sport" name="sport_type" required><option value="">Selecciona</option><option value="surf">Surf</option><option value="esquí">Esquí</option><option value="snowboard">Snowboard</option><option value="ciclismo">Ciclismo</option><option value="montañismo">Montañismo</option><option value="escalada">Escalada</option><option value="kayak">Kayak</option></select></div>
+              <div class="form-group"><label for="pub-material">Nombre del material</label><input type="text" id="pub-material" name="material_name" placeholder="Ej: Tabla Shortboard 6'0" required /></div>
+              
+              <div class="form-group full-width">
+                <label>Foto <span class="hint">(obligatoria)</span></label>
+                <div class="file-upload-wrapper" id="fileDropzone">
+                  <input type="file" id="pub-image" name="image" accept="image/jpeg,image/png,image/webp" capture="environment" required />
+                  <div class="file-upload-icon">📸</div>
+                  <div class="file-upload-text">Toca para hacer foto o subir imagen</div>
+                  <div class="file-upload-hint">Máx 5MB · JPG, PNG, WEBP</div>
+                  <img class="file-preview" id="filePreview" alt="Vista previa" />
+                </div>
+              </div>
+
+              <div class="form-group"><label for="pub-available-from">Disponible desde</label><input type="date" id="pub-available-from" name="available_from" required /></div>
+              <div class="form-group"><label for="pub-available-to">Disponible hasta</label><input type="date" id="pub-available-to" name="available_to" required /></div>
+              <div class="form-group"><label for="pub-location">Ubicación</label><input type="text" id="pub-location" name="location" placeholder="Ciudad" required /></div>
+              <div class="form-group"><label for="pub-price">Precio base</label><div class="input-with-icon"><input type="number" id="pub-price" name="price_per_alquiler" placeholder="20" min="1" required /><span class="input-icon">€/alq</span></div></div>
+              <div class="form-group full-width"><label for="pub-description">Descripción <span class="hint">(opcional)</span></label><textarea id="pub-description" name="description" placeholder="Estado, accesorios, condiciones..."></textarea></div>
+              <div class="form-group"><label for="pub-name">Tu nombre</label><input type="text" id="pub-name" name="contact_name" placeholder="Nombre" required /></div>
+              <div class="form-group"><label for="pub-email">Email</label><input type="email" id="pub-email" name="contact_email" placeholder="tu@email.com" required /></div>
+            </div>
+            <button type="submit" class="btn-submit">Publicar</button>
+          </form>
         </div>
-
-        <!-- Precio -->
-        <div class="form-group">
-          <label for="precio" id="labelPrecio">
-            Precio por día <span class="hint" id="hintPrecio">— ¿cuánto pagarías?</span>
-          </label>
-          <div class="input-with-icon">
-            <input 
-              type="number" 
-              id="precio" 
-              placeholder="15"
-              min="1"
-              required
-            />
-            <span class="input-icon">€/día</span>
-          </div>
-        </div>
-
-        <!-- Descripción adicional -->
-        <div class="form-group">
-          <label for="descripcion" id="labelDescripcion">
-            Información adicional <span class="hint">(opcional)</span>
-          </label>
-          <textarea 
-            id="descripcion" 
-            placeholder="Añade cualquier detalle relevante: talla, nivel de experiencia, preferencias..."
-          ></textarea>
-        </div>
-
-        <!-- Contacto -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombre">Tu nombre</label>
-            <input type="text" id="nombre" placeholder="Nombre" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email de contacto</label>
-            <input type="email" id="email" placeholder="tu@email.com" required />
-          </div>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit" class="btn-submit" id="btnSubmit">
-          Publicar solicitud
-        </button>
-      </form>
+      </section>
     </div>
+  </main>
 
-    <!-- Back Link -->
-    <a href="index.html" class="back-link">← Volver a la página principal</a>
-  </div>
-
-  <!-- Success Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <div class="modal-icon success">✅</div>
-      <h3 id="modalTitle">¡Solicitud enviada!</h3>
-      <p id="modalText">
-        Hemos recibido tu solicitud. Te contactaremos cuando encontremos el material que buscas.
-      </p>
+      <h3 id="modalTitle">¡Publicado!</h3>
+      <p id="modalText">Tu material ya está disponible.</p>
       <button type="button" class="modal-btn" onclick="closeModal()">Entendido</button>
     </div>
   </div>
 
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html" class="logo">GEAR<span>SHARE</span></a>
+        <p>© 2026 GearShare</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    // Set minimum dates to today
+    const API_URL = 'https://alquiler-worker.cao-gq.workers.dev';
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('fechaInicio').min = today;
-    document.getElementById('fechaFin').min = today;
+    ['pub-available-from','pub-available-to','search-date-start','search-date-end'].forEach(id => document.getElementById(id).min = today);
 
-    // Update end date minimum when start date changes
-    document.getElementById('fechaInicio').addEventListener('change', function() {
-      document.getElementById('fechaFin').min = this.value;
-      if (document.getElementById('fechaFin').value < this.value) {
-        document.getElementById('fechaFin').value = this.value;
-      }
+    document.getElementById('pub-available-from').addEventListener('change', function() {
+      document.getElementById('pub-available-to').min = this.value;
+      if(document.getElementById('pub-available-to').value < this.value) document.getElementById('pub-available-to').value = this.value;
+    });
+    document.getElementById('search-date-start').addEventListener('change', function() {
+      document.getElementById('search-date-end').min = this.value;
+      if(document.getElementById('search-date-end').value < this.value) document.getElementById('search-date-end').value = this.value;
     });
 
-    // Mode switching
-    function setMode(mode) {
-      const formCard = document.getElementById('formCard');
-      const btnQuiero = document.getElementById('btnQuiero');
-      const btnTengo = document.getElementById('btnTengo');
-      
-      formCard.dataset.mode = mode;
-      
-      if (mode === 'quiero') {
-        btnQuiero.classList.add('active');
-        btnTengo.classList.remove('active');
-        updateLabels('quiero');
-      } else {
-        btnTengo.classList.add('active');
-        btnQuiero.classList.remove('active');
-        updateLabels('tengo');
-      }
-    }
-
-    function updateLabels(mode) {
-      const elements = {
-        formTitle: document.getElementById('formTitle'),
-        formSubtitle: document.getElementById('formSubtitle'),
-        labelMaterial: document.getElementById('labelMaterial'),
-        labelFechaInicio: document.getElementById('labelFechaInicio'),
-        labelFechaFin: document.getElementById('labelFechaFin'),
-        labelUbicacion: document.getElementById('labelUbicacion'),
-        hintUbicacion: document.getElementById('hintUbicacion'),
-        labelPrecio: document.getElementById('labelPrecio'),
-        hintPrecio: document.getElementById('hintPrecio'),
-        labelDescripcion: document.getElementById('labelDescripcion'),
-        btnSubmit: document.getElementById('btnSubmit'),
-        material: document.getElementById('material'),
-        descripcion: document.getElementById('descripcion'),
-        modalTitle: document.getElementById('modalTitle'),
-        modalText: document.getElementById('modalText')
-      };
-
-      if (mode === 'quiero') {
-        elements.formTitle.textContent = 'Busco material deportivo';
-        elements.formSubtitle.textContent = 'Cuéntanos qué material necesitas y te ayudaremos a encontrarlo cerca de ti.';
-        elements.labelMaterial.innerHTML = '¿Qué material necesitas?';
-        elements.labelFechaInicio.textContent = 'Fecha inicio';
-        elements.labelFechaFin.textContent = 'Fecha fin';
-        elements.labelUbicacion.innerHTML = 'Ubicación <span class="hint" id="hintUbicacion">— donde lo necesitas</span>';
-        elements.labelPrecio.innerHTML = 'Precio por día <span class="hint" id="hintPrecio">— ¿cuánto pagarías?</span>';
-        elements.labelDescripcion.innerHTML = 'Información adicional <span class="hint">(opcional)</span>';
-        elements.btnSubmit.textContent = 'Publicar solicitud';
-        elements.material.placeholder = 'Ej: Tabla de surf 7\'2, neopreno talla M...';
-        elements.descripcion.placeholder = 'Añade cualquier detalle relevante: talla, nivel de experiencia, preferencias...';
-        elements.modalTitle.textContent = '¡Solicitud enviada!';
-        elements.modalText.textContent = 'Hemos recibido tu solicitud. Te contactaremos cuando encontremos el material que buscas.';
-      } else {
-        elements.formTitle.textContent = 'Tengo material para prestar';
-        elements.formSubtitle.textContent = 'Publica el material que tienes disponible y empieza a generar ingresos.';
-        elements.labelMaterial.innerHTML = '¿Qué material ofreces?';
-        elements.labelFechaInicio.textContent = 'Disponible desde';
-        elements.labelFechaFin.textContent = 'Disponible hasta';
-        elements.labelUbicacion.innerHTML = 'Ubicación <span class="hint" id="hintUbicacion">— donde está el material</span>';
-        elements.labelPrecio.innerHTML = 'Precio por día <span class="hint" id="hintPrecio">— ¿cuánto cobrarías?</span>';
-        elements.labelDescripcion.innerHTML = 'Descripción del material <span class="hint">(opcional)</span>';
-        elements.btnSubmit.textContent = 'Publicar oferta';
-        elements.material.placeholder = 'Ej: Tabla de surf 7\'2 en buen estado, neopreno 3/2mm...';
-        elements.descripcion.placeholder = 'Describe el estado del material, accesorios incluidos, condiciones de uso...';
-        elements.modalTitle.textContent = '¡Oferta publicada!';
-        elements.modalText.textContent = 'Tu material ya está visible. Te contactaremos cuando alguien esté interesado.';
-      }
-    }
-
-    // Form submission
-    function handleSubmit(event) {
-      event.preventDefault();
-      
-      // Show modal
-      document.getElementById('modalOverlay').classList.add('active');
-      
-      // Reset form
-      document.getElementById('gearForm').reset();
-    }
-
-    // Close modal
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-    }
-
-    // Close modal on overlay click
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
+    // File preview & mobile UX
+    const fileInput = document.getElementById('pub-image');
+    const dropzone = document.getElementById('fileDropzone');
+    const preview = document.getElementById('filePreview');
+    fileInput.addEventListener('change', function() {
+      if(this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { preview.src = e.target.result; dropzone.classList.add('has-file'); };
+        reader.readAsDataURL(this.files[0]);
+      } else { dropzone.classList.remove('has-file'); preview.src = ''; }
     });
 
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal();
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const buscarSection = document.getElementById('buscar-section');
+    const publicarSection = document.getElementById('publicar-section');
+    tabs.forEach(tab => tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      if(this.dataset.tab === 'buscar') { buscarSection.classList.add('active'); publicarSection.classList.remove('active'); }
+      else { buscarSection.classList.remove('active'); publicarSection.classList.add('active'); }
+    }));
+
+    // Search
+    async function handleSearch(e) {
+      e.preventDefault();
+      const params = new URLSearchParams(new FormData(e.target));
+      try {
+        const res = await fetch(`${API_URL}/api/search?${params}`);
+        const data = await res.json();
+        renderResults(data.success ? data.data : []);
+      } catch { renderResults([]); }
+    }
+
+    const offersCache = new Map();
+    function renderResults(offers) {
+      const grid = document.getElementById('results-grid');
+      offersCache.clear();
+      if(!offers?.length) {
+        grid.innerHTML = `<div class="no-results"><div class="no-results-icon">🔍</div><h3>Sin resultados</h3><p>No hay material disponible con esos filtros</p></div>`;
+        return;
       }
-    });
+      grid.innerHTML = offers.map(o => {
+        const id = o.id || crypto.randomUUID();
+        offersCache.set(id, o);
+        return `<div class="result-card" onclick="openDetailModal('${id}')">
+          <div class="result-image-wrapper">
+            ${o.image_url ? `<img class="result-image" src="${o.image_url}" alt="${o.material_name}" loading="lazy" onerror="this.style.display='none'">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:42px;">🏄</div>`}
+            <span class="result-sport-badge">${o.sport_type}</span>
+          </div>
+          <div class="result-content">
+            <h3 class="result-title">${o.material_name}</h3>
+            <div class="result-location">📍 ${o.location}</div>
+            <div class="result-price">${parseFloat(o.total_price).toFixed(2)}€ <span class="label">/alquiler</span></div>
+            <span class="result-cta">Ver detalles →</span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Detail Modal
+    let detailModalCreated = false;
+    function openDetailModal(id) {
+      const o = offersCache.get(id);
+      if(!o) return;
+      if(!detailModalCreated) {
+        document.body.insertAdjacentHTML('beforeend', `
+          <div id="detailModalOverlay" onclick="if(event.target===this) closeDetailModal()">
+            <div class="detail-modal">
+              <button class="modal-close" onclick="closeDetailModal()">✕</button>
+              <img class="modal-image" src="" alt="Material">
+              <div class="modal-body">
+                <span class="modal-sport-badge"></span>
+                <h2 class="modal-title"></h2>
+                <div class="modal-meta"><span class="modal-location"></span><span class="modal-dates"></span></div>
+                <p class="modal-description"></p>
+                <div class="modal-price-box">
+                  <div class="modal-price-row"><span>Precio base</span><span class="price-base"></span></div>
+                  <div class="modal-price-row"><span>Gestión (10%)</span><span class="price-fee"></span></div>
+                  <div class="modal-price-row"><span>Seguro</span><span class="price-insurance"></span></div>
+                  <div class="modal-price-row total"><span>Total</span><span class="price-total"></span></div>
+                </div>
+                <a href="#" class="modal-contact-btn" id="btnReservar">📅 Reservar material</a>
+              </div>
+            </div>
+          </div>`);
+        detailModalCreated = true;
+      }
+      const m = document.getElementById('detailModalOverlay');
+      m.querySelector('.modal-image').src = o.image_url || '';
+      m.querySelector('.modal-sport-badge').textContent = o.sport_type;
+      m.querySelector('.modal-title').textContent = o.material_name;
+      m.querySelector('.modal-location').textContent = `📍 ${o.location}`;
+      m.querySelector('.modal-dates').textContent = `📅 ${o.available_from} → ${o.available_to}`;
+      m.querySelector('.modal-description').textContent = o.description || 'Sin descripción.';
+      const base = parseFloat(o.price_per_alquiler)||0, ins = parseFloat(o.insurance_fee)||0;
+      m.querySelector('.price-base').textContent = `${base.toFixed(2)}€`;
+      m.querySelector('.price-fee').textContent = `${(base*0.1).toFixed(2)}€`;
+      m.querySelector('.price-insurance').textContent = `${ins.toFixed(2)}€`;
+      m.querySelector('.price-total').textContent = `${(base + base*0.1 + ins).toFixed(2)}€`;
+      m.querySelector('.modal-contact-btn').href = `reserva.html?id=${id}&material=${encodeURIComponent(o.material_name)}&price=${encodeURIComponent(o.total_price)}&owner=${encodeURIComponent(o.contact_name)}`;
+      m.classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    function closeDetailModal() { document.getElementById('detailModalOverlay')?.classList.remove('active'); document.body.style.overflow = ''; }
+
+    // Publish
+    async function handlePublish(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.disabled = true; btn.textContent = 'Publicando...';
+      try {
+        const res = await fetch(`${API_URL}/api/offers`, { method:'POST', body: new FormData(e.target) });
+        const data = await res.json();
+        if(data.success) { document.getElementById('modalOverlay').classList.add('active'); e.target.reset(); dropzone.classList.remove('has-file'); preview.src=''; }
+        else alert(data.error || 'Error al publicar');
+      } catch { alert('Error de conexión'); }
+      finally { btn.disabled = false; btn.textContent = 'Publicar'; }
+    }
+
+    function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); window.location.href = 'formulario.html?tab=buscar'; }
+    document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') { closeDetailModal(); closeModal(); } });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('tab')==='publicar') { tabs[0].classList.remove('active'); tabs[1].classList.add('active'); buscarSection.classList.remove('active'); publicarSection.classList.add('active'); }
   </script>
 </body>
 </html>
