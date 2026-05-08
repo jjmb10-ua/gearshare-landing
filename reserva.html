@@ -69,9 +69,10 @@
   <div class="modal-overlay" id="successModal">
     <div class="modal">
       <div class="modal-icon">✅</div>
-      <h2>¡Reserva simulada!</h2>
-      <p>En un entorno real, aquí se procesaría el pago y se notificaría al propietario.</p>
-      <button class="modal-btn" onclick="window.location.href='formulario.html?tab=buscar'">Entendido</button>
+      <h2>¡Reserva Confirmada!</h2>
+      <p>Muestra este código QR al recoger tu material.</p>
+      <img id="qrCode" src="" alt="Código QR de Reserva" style="margin: 0 auto 20px; display: block; border-radius: 8px;">
+      <button class="modal-btn" onclick="window.location.href='formulario.html?tab=buscar'">Volver al inicio</button>
     </div>
   </div>
 
@@ -92,6 +93,8 @@
       btn.textContent = 'Procesando...';
       
       setTimeout(() => {
+        const randomId = Math.random().toString(36).substring(2, 10).toUpperCase();
+        document.getElementById('qrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GEARSHARE-${randomId}`;
         document.getElementById('successModal').classList.add('active');
         btn.disabled = false;
         btn.textContent = 'Confirmar Reserva (Demo)';

@@ -15,7 +15,10 @@ INSERT OR IGNORE INTO categories_insurance (category_id, insurance_fee) VALUES
     ('ciclismo', 3.00),
     ('montañismo', 1.50),
     ('escalada', 1.50),
-    ('kayak', 4.50);
+    ('kayak', 4.50),
+    ('tenis', 1.50),
+    ('paddle', 1.50),
+    ('otro', 3.00);
 
 -- 2. Tabla de ofertas de alquiler
 CREATE TABLE IF NOT EXISTS offers (
