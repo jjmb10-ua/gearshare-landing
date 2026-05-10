@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invertir en GearShare | Plataforma P2P de alquiler de material deportivo en España</title>
+  <meta name="description" content="Invierte en la primera plataforma P2P asegurada de alquiler de material deportivo en España. Ronda seed abierta de 25.000€. Marketplace local, seguro integrado y newsletter top 20% en Beehiiv. Solicita el investor memo." />
+  <meta name="keywords" content="invertir startup deporte, plataforma alquiler material deportivo, marketplace P2P España, ronda seed deporte, economía colaborativa deportiva, GearShare inversores" />
+  <meta property="og:title" content="Invertir en GearShare | Marketplace P2P de material deportivo" />
+  <meta property="og:description" content="Ronda seed de 25.000€ abierta. Plataforma asegurada de alquiler entre particulares con tracción real en Alicante." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #0A0A0B; --bg-surface: #131316; --bg-elevated: #1C1C20;
+      --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.15);
+      --text-primary: #FAFAFA; --text-secondary: rgba(250,250,250,0.65); --text-muted: rgba(250,250,250,0.4);
+      --accent: #10B981; --accent-glow: rgba(16,185,129,0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary); background: var(--bg-deep);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .container { width: min(1180px, 100%); margin: 0 auto; padding: 0 24px; }
+    .serif { font-family: 'Fraunces', Georgia, serif; letter-spacing: -0.02em; }
+    .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 24px;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(10,10,11,0.72);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); z-index: 1000;
+    }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; }
+    .logo { font-size: 20px; font-weight: 800; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+    .logo strong { color: var(--accent); font-weight: 800; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 14px 26px; border-radius: 8px;
+      font-family: inherit; font-weight: 600; font-size: 15px;
+      text-decoration: none; cursor: pointer;
+      border: 1px solid transparent; transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--accent); color: #04231A; }
+    .btn-primary:hover { background: #0EA572; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--text-primary); border-color: var(--border-strong); }
+    .btn-ghost:hover { border-color: var(--text-primary); }
+    .btn-lg { padding: 18px 32px; font-size: 16px; }
+
+    /* HERO */
+    .hero { padding: 180px 0 120px; }
+    .hero h1 { font-size: clamp(48px, 8vw, 96px); font-weight: 500; line-height: 0.98; margin-bottom: 32px; max-width: 16ch; }
+    .hero p.lead { font-size: 18px; color: var(--text-secondary); max-width: 60ch; margin-bottom: 40px; line-height: 1.6; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 80px; }
+
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .kpi { padding: 32px 24px; border-right: 1px solid var(--border); }
+    .kpi:last-child { border-right: none; }
+    .kpi-value { font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 4vw, 40px); font-weight: 500; line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .kpi-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* SECTION */
+    section.block { padding: 120px 0; border-top: 1px solid var(--border); }
+    .section-head { max-width: 720px; margin-bottom: 64px; }
+    .section-head h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 500; line-height: 1.05; margin-bottom: 20px; }
+    .section-head p { font-size: 17px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* WHY INVEST (4 claves) */
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .why-card { background: var(--bg-surface); padding: 40px 32px; transition: background 0.25s ease; }
+    .why-card:hover { background: var(--bg-elevated); }
+    .why-icon { font-size: 36px; line-height: 1; margin-bottom: 24px; }
+    .why-title { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 500; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .why-text { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* QA CARDS */
+    .qa-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    .qa-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 48px; transition: border-color 0.25s ease; display: grid; grid-template-columns: minmax(0, 1fr) 220px; grid-template-areas: "content photo"; gap: 56px; align-items: center; }
+    .qa-card:nth-child(even) { grid-template-columns: 220px minmax(0, 1fr); grid-template-areas: "photo content"; }
+    .qa-card:hover { border-color: var(--border-strong); }
+    .qa-photo-wrap { grid-area: photo; display: flex; justify-content: center; }
+    .qa-content { grid-area: content; min-width: 0; }
+    .qa-photo { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); background: var(--bg-elevated); display: block; flex-shrink: 0; }
+    .qa-photo-fallback { width: 220px; height: 220px; border-radius: 50%; background: var(--bg-elevated); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 72px; letter-spacing: -0.02em; flex-shrink: 0; }
+    .qa-author { margin-bottom: 24px; }
+    .qa-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .qa-role { font-size: 13px; color: var(--text-muted); }
+    .qa-question { font-family: 'Fraunces', Georgia, serif; font-size: clamp(24px, 2.6vw, 34px); font-weight: 400; line-height: 1.2; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.01em; }
+    .qa-question::before { content: '\201C'; color: var(--accent); margin-right: 4px; }
+    .qa-question::after { content: '\201D'; color: var(--accent); margin-left: 2px; }
+    .qa-answer { font-size: 16px; line-height: 1.65; color: var(--text-secondary); }
+    .qa-answer a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .qa-answer a:hover { color: #34D399; }
+
+    /* DEMO */
+    .demo-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+    .demo-copy h2 { margin-bottom: 20px; }
+    .demo-copy p { font-size: 17px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 32px; max-width: 50ch; }
+    .demo-cta { margin-bottom: 24px; }
+    .demo-secondary { font-size: 13px; color: var(--text-muted); }
+    .demo-secondary a { color: var(--text-muted); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .demo-secondary a:hover { color: var(--text-secondary); }
+    .demo-secondary .sep { margin: 0 10px; color: var(--border-strong); }
+    .demo-mock { position: relative; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; background: var(--bg-surface); }
+    .demo-mock img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+    .demo-tag { position: absolute; top: 16px; left: 16px; background: rgba(10,10,11,0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-strong); border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 var(--accent-glow); animation: pulse 1.8s cubic-bezier(0.4,0,0.6,1) infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } }
+
+    /* NEWSLETTER */
+    section.block.newsletter-block { background: #000; border-top: none; padding: 5% 5%; }
+    .nl-layout { display: grid; grid-template-columns: 25fr 5fr 40fr 5fr 25fr; align-items: center; }
+    .nl-badge { grid-column: auto; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px; }
+    .nl-badge:first-child { grid-column: 1; }
+    .nl-badge:last-child { grid-column: 5; }
+    .nl-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nl-wrap { grid-column: 3; display: flex; flex-direction: column; justify-content: center; text-align: center; min-width: 0; }
+    .nl-wrap .section-head { margin: 0 auto 20px; text-align: center; max-width: none; }
+    .nl-wrap .section-head h2 { font-size: clamp(18px, 2.8vw, 38px); margin-bottom: 10px; }
+    .nl-wrap .section-head p { font-size: clamp(11px, 1.2vw, 15px); }
+    .nl-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 4px; }
+    .nl-form input, .nl-form button { font-family: inherit; font-size: clamp(12px, 1.2vw, 15px); padding: clamp(8px, 1vw, 14px) clamp(10px, 1.2vw, 16px); border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-primary); transition: border-color 0.2s; min-width: 0; width: 100%; }
+    .nl-form input::placeholder { color: var(--text-muted); }
+    .nl-form input:focus { outline: none; border-color: var(--accent); }
+    .nl-form button { background: var(--accent); color: #04231A; border-color: var(--accent); font-weight: 600; cursor: pointer; }
+    .nl-form button:hover:not(:disabled) { background: #0EA572; }
+    .nl-form button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .nl-status { margin-top: 12px; font-size: clamp(11px, 1vw, 14px); min-height: 16px; }
+    .nl-status.ok { color: var(--accent); }
+    .nl-status.err { color: #F87171; }
+    .nl-success { display: none; padding: 16px 20px; border-radius: 6px; border: 1px solid var(--accent); background: rgba(16,185,129,0.08); color: var(--accent); font-size: clamp(12px, 1.1vw, 15px); }
+    .nl-success.visible { display: block; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 64px 0 32px; background: var(--bg-deep); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-tag { font-family: 'Fraunces', Georgia, serif; font-size: 18px; line-height: 1.45; color: var(--text-secondary); margin: 16px 0; max-width: 36ch; }
+    .footer-email { color: var(--accent); font-size: 14px; text-decoration: none; }
+    .footer-email:hover { text-decoration: underline; }
+    .footer-col h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text-primary); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text-muted); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .qa-card { grid-template-columns: minmax(0, 1fr) 180px; grid-template-areas: "content photo"; gap: 40px; padding: 40px; }
+      .qa-card:nth-child(even) { grid-template-columns: 180px minmax(0, 1fr); grid-template-areas: "photo content"; }
+      .qa-photo, .qa-photo-fallback { width: 180px; height: 180px; }
+      .qa-photo-fallback { font-size: 60px; }
+      .demo-grid { grid-template-columns: 1fr; gap: 40px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      section.block, .hero { padding: 80px 0; }
+      .hero { padding-top: 140px; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .kpi { border-bottom: 1px solid var(--border); }
+      .kpi:nth-child(odd) { border-right: 1px solid var(--border); }
+      .kpi:nth-child(even) { border-right: none; }
+      .kpi:nth-last-child(-n+2) { border-bottom: none; }
+      .qa-card, .qa-card:nth-child(even) { grid-template-columns: 1fr; grid-template-areas: "photo" "content"; gap: 24px; padding: 28px 24px; justify-items: center; }
+      .qa-content { width: 100%; }
+      .qa-photo, .qa-photo-fallback { width: 160px; height: 160px; }
+      .qa-photo-fallback { font-size: 52px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-card { padding: 32px 24px; }
+      .hero-ctas .btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">GEAR<strong>SHARE</strong></a>
+        <a href="index.html" class="back-link">&larr; Volver a la web pública</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Inversores · Ronda Seed Q2 2026</span>
+        <h1 class="serif">El acceso al deporte. Sin comprar el material.</h1>
+        <p class="lead">Tu marketplace P2P asegurado de material deportivo de confianza</p>
+        <div class="hero-ctas">
+          <a href="#newsletter" class="btn btn-primary btn-lg">Solicitar investor memo</a>
+          <a href="#demo" class="btn btn-ghost btn-lg">Ver la demo &rarr;</a>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-value">25K&euro;</div>
+            <div class="kpi-label">Ronda buscada</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">7,4/10</div>
+            <div class="kpi-label">Interés validado (n=27)</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">67%</div>
+            <div class="kpi-label">Material infrautilizado</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">8 meses</div>
+            <div class="kpi-label">Runway hasta Series A</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUÉ INVERTIR -->
+    <section class="block" id="por-que">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="serif">Por qué invertir en GearShare.</h2>
+        </div>
+        <div class="why-grid reveal">
+          <div class="why-card">
+            <div class="why-icon">🌍</div>
+            <h3 class="why-title">Mercado validado</h3>
+            <p class="why-text">67% del material deportivo se usa menos de 5 veces al año. 7,4/10 de interés en 27 entrevistas reales.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">💰</div>
+            <h3 class="why-title">Doble línea de ingresos</h3>
+            <p class="why-text">Comisión P2P más seguro asegurado. 1,76€ de margen por operación. Casi el doble del marketplace medio.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🚀</div>
+            <h3 class="why-title">Tracción real</h3>
+            <p class="why-text">Newsletter Insider top 20% en open y click. Demo pública en vivo. Comunidad activa creciendo en TikTok.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🔄</div>
+            <h3 class="why-title">Playbook escalable</h3>
+            <p class="why-text">Validamos Alicante en 8 meses. Murcia y Valencia ya en el roadmap del año 2 con el mismo modelo replicado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A -->
+    <section class="block" id="qa">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="serif">Las preguntas que nos han hecho. Y nuestras respuestas.</h2>
+          <p>Hemos pitcheado a más de 15 inversores y mentores del ecosistema deportivo y startup en España. Estas son las preguntas más duras y así las respondemos.</p>
+        </div>
+
+        <div class="qa-grid">
+
+          <article class="qa-card reveal">
+            <div class="qa-photo-wrap">
+              <img class="qa-photo" src="assets/investors/adrian-giner.jpg" alt="Adrián Giner"
+                   onerror="this.outerHTML='<div class=&quot;qa-photo-fallback&quot; aria-hidden=&quot;true&quot;>AG</div>'" />
+            </div>
+            <div class="qa-content">
+              <div class="qa-author">
+                <div class="qa-name">Adrián Giner</div>
+                <div class="qa-role">Inversor</div>
+              </div>
+              <p class="qa-question serif">Si me cuesta 2&euro; prestar, &iquest;cu&aacute;nto vale el seguro?</p>
+              <p class="qa-answer">El seguro es nuestra segunda línea de ingresos, no un coste oculto. Tres categorías según el material. Básico 1,50&euro;, medio 3,00&euro;, premium 4,50&euro;. El coste actuarial real es 1,09&euro; y cobramos 2,85&euro; de media. Eso son 1,76&euro; de margen por operación que casi duplican la comisión del marketplace P2P.</p>
+            </div>
+          </article>
+
+          <article class="qa-card reveal">
+            <div class="qa-photo-wrap">
+              <img class="qa-photo" src="assets/investors/anas-dhairi.jpg" alt="Anas Dhairi"
+                   onerror="this.outerHTML='<div class=&quot;qa-photo-fallback&quot; aria-hidden=&quot;true&quot;>AD</div>'" />
+            </div>
+            <div class="qa-content">
+              <div class="qa-author">
+                <div class="qa-name">Anas Dhairi</div>
+                <div class="qa-role">Inversor</div>
+              </div>
+              <p class="qa-question serif">&iquest;C&oacute;mo se env&iacute;a y se devuelve el producto?</p>
+              <p class="qa-answer">Modelo hiperlocal por defecto. La geolocalización muestra material a menos de 2 km y el intercambio es en persona, validado con check-in y check-out fotográfico obligatorios. Para los primeros meses presupuestamos 3.000&euro; de logística de apoyo. A medio plazo activamos taquillas inteligentes en zonas universitarias y un protocolo de emergencia que reubica al usuario si su préstamo falla.</p>
+            </div>
+          </article>
+
+          <article class="qa-card reveal">
+            <div class="qa-photo-wrap">
+              <img class="qa-photo" src="assets/investors/ricardo-valls.jpg" alt="Ricardo Valls"
+                   onerror="this.outerHTML='<div class=&quot;qa-photo-fallback&quot; aria-hidden=&quot;true&quot;>RV</div>'" />
+            </div>
+            <div class="qa-content">
+              <div class="qa-author">
+                <div class="qa-name">Ricardo Valls</div>
+                <div class="qa-role">Inversor</div>
+              </div>
+              <p class="qa-question serif">&iquest;Por qu&eacute; el financiero duplica ventas con menos costes y por qu&eacute; no te vas a ese escenario directamente?</p>
+              <p class="qa-answer">Porque el año 2 no existe sin el año 1. El sobrecoste inicial son 3.000&euro; de logística para compensar la baja densidad y el handicap de marca emergente. Cada euro invertido en captación compra un usuario que en el año 2 ya genera transacciones recurrentes a coste marginal cero. Saltarse el año 1 es saltarse la base de usuarios que hace rentable el año 2. Es la curva clásica de cualquier marketplace que llega a líder de su categoría.</p>
+            </div>
+          </article>
+
+          <article class="qa-card reveal">
+            <div class="qa-photo-wrap">
+              <img class="qa-photo" src="assets/investors/joan-roma.jpg" alt="Joan Romá"
+                   onerror="this.outerHTML='<div class=&quot;qa-photo-fallback&quot; aria-hidden=&quot;true&quot;>JR</div>'" />
+            </div>
+            <div class="qa-content">
+              <div class="qa-author">
+                <div class="qa-name">Joan Romá</div>
+                <div class="qa-role">Inversor</div>
+              </div>
+              <p class="qa-question serif">Exactamente, &iquest;c&oacute;mo pens&aacute;is daros a conocer?</p>
+              <p class="qa-answer">Nuestro motor principal es la newsletter <a href="https://gearshare.beehiiv.com/" target="_blank" rel="noopener">GearShare Insider</a>, ya activa en Beehiiv y dentro del top 20% en open rate y click rate de la plataforma. Construimos audiencia con contenido de deporte, creatividad y marketing antes de pedirles que alquilen. Es coste marginal cero y relación directa sin depender de algoritmos. Lo complementamos con TikTok orgánico (<a href="https://www.tiktok.com/@gearshare_oficial" target="_blank" rel="noopener">@gearshare_oficial</a>), SEM hiperlocal en Alicante y un programa de UGC.</p>
+            </div>
+          </article>
+
+          <article class="qa-card reveal">
+            <div class="qa-photo-wrap">
+              <img class="qa-photo" src="assets/investors/ricardo-valls.jpg" alt="Ricardo Valls"
+                   onerror="this.outerHTML='<div class=&quot;qa-photo-fallback&quot; aria-hidden=&quot;true&quot;>RV</div>'" />
+            </div>
+            <div class="qa-content">
+              <div class="qa-author">
+                <div class="qa-name">Ricardo Valls</div>
+                <div class="qa-role">Inversor</div>
+              </div>
+              <p class="qa-question serif">&iquest;Qu&eacute; vamos a hacer para el segundo a&ntilde;o duplicar facturaci&oacute;n incluso con menos costes?</p>
+              <p class="qa-answer">Cinco palancas accionables. Una, el efecto red reduce la logística de apoyo de 14.000&euro; a 10.500&euro;. Dos, eliminamos el handicap de marca emergente sin subir spend. Tres, los usuarios del año 1 generan referidos orgánicos. Cuatro, activamos B2B con tiendas y clubes ya conocidos. Cinco, abrimos un segundo nodo en Murcia o Valencia replicando un playbook ya validado.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="block" id="demo">
+      <div class="container">
+        <div class="demo-grid">
+          <div class="demo-copy reveal">
+            <h2 class="serif">Prueba el producto antes de invertir.</h2>
+            <p>Tenemos una demo pública en vivo. Rellena el flujo "Tengo" o "Quiero" y verás el marketplace funcionando con ofertas reales cerca de ti.</p>
+            <div class="demo-cta">
+              <a href="index.html" class="btn btn-primary btn-lg">¡Pruébalo! &rarr;</a>
+            </div>
+            <div class="demo-secondary">
+              <a href="https://gearshare.beehiiv.com/" target="_blank" rel="noopener">Newsletter pública (Beehiiv)</a>
+              <span class="sep">·</span>
+              <a href="https://www.tiktok.com/@gearshare_oficial" target="_blank" rel="noopener">TikTok</a>
+            </div>
+          </div>
+          <div class="demo-mock reveal" aria-hidden="true">
+            <span class="demo-tag"><span class="pulse"></span>EN VIVO</span>
+            <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800&h=600&fit=crop" alt="" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="block newsletter-block" id="newsletter">
+      <div class="nl-layout reveal">
+        <div class="nl-badge">
+          <img src="assets/open-rate-badge-beehiiv.png" alt="Insignia Beehiiv top 20% open rate" loading="lazy" />
+        </div>
+
+        <div class="nl-wrap">
+          <div class="section-head">
+            <h2 class="serif">Suscríbete a GearShare Insider.</h2>
+            <p>La newsletter top 20% con contenido deportivo de calidad.</p>
+          </div>
+
+          <form class="nl-form" id="investorForm" novalidate>
+            <input type="email" id="invEmail" placeholder="tu@email.com" autocomplete="email" required aria-label="Correo electrónico" />
+            <button type="submit" id="invSubmit">Suscribirme &rarr;</button>
+          </form>
+          <p class="nl-status" id="invStatus" aria-live="polite"></p>
+          <div class="nl-success" id="invSuccess">&#10003; Bienvenido a GearShare Insider.</div>
+        </div>
+
+        <div class="nl-badge">
+          <img src="assets/click-rate-badge-beehiiv.png" alt="Insignia Beehiiv top 20% click rate" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo">GEAR<strong>SHARE</strong></a>
+          <p class="footer-tag serif">"El deporte es de todos y nosotros ponemos el material."</p>
+          <a href="mailto:invest@gearshare.es" class="footer-email">invest@gearshare.es</a>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="index.html">Web pública</a></li>
+            <li><a href="#">Pitch deck (PDF)</a></li>
+            <li><a href="#">One-pager</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 GearShare. Hecho en Alicante.</div>
+    </div>
+  </footer>
+
+  <script>
+    var WORKER_URL = 'https://gear-share.cao-gq.workers.dev/';
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    var form = document.getElementById('investorForm');
+    var emailInput = document.getElementById('invEmail');
+    var btn = document.getElementById('invSubmit');
+    var status = document.getElementById('invStatus');
+    var success = document.getElementById('invSuccess');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = emailInput.value.trim();
+
+      status.className = 'nl-status';
+      status.textContent = '';
+
+      if (!emailRegex.test(email)) {
+        status.className = 'nl-status err';
+        status.textContent = 'Introduce un correo electrónico válido.';
+        emailInput.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          tipo: 'gearshare_insider'
+        })
+      })
+        .then(function (res) {
+          if (!res.ok) {
+            return res.text().then(function (t) { throw new Error(t || 'Error'); });
+          }
+          return res.json().catch(function () { return { ok: true }; });
+        })
+        .then(function () {
+          form.style.display = 'none';
+          status.textContent = '';
+          success.classList.add('visible');
+        })
+        .catch(function (err) {
+          status.className = 'nl-status err';
+          if (err.message && err.message.toLowerCase().indexOf('unique') !== -1) {
+            status.textContent = 'Este correo ya está registrado. Te avisaremos en el próximo update.';
+          } else {
+            status.textContent = 'No hemos podido registrarte. Inténtalo de nuevo en unos minutos.';
+          }
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.innerHTML = 'Suscribirme &rarr;';
+        });
+    });
+
+    // Reveal on scroll
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    }
+  </script>
+</body>
+</html>
